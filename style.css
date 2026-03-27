@@ -22,7 +22,6 @@ body {
 
 h1 {
     margin-bottom: 5px;
-    color: #333;
 }
 
 .subtitle {
@@ -38,13 +37,6 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 15px;
-    transition: 0.3s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 #result {
@@ -52,7 +44,6 @@ button:hover {
     padding: 20px;
     background: #f7f9fc;
     border-radius: 10px;
-    font-size: 16px;
     text-align: left;
 }
 
@@ -60,8 +51,6 @@ table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
 th {
@@ -75,10 +64,6 @@ td {
     border-bottom: 1px solid #eee;
 }
 
-tr:hover {
-    background: #f1f3ff;
-}
-
 .correct {
     background-color: #e6ffed;
 }
@@ -89,5 +74,4 @@ tr:hover {
 
 .prob-high {
     font-weight: bold;
-    color: #764ba2;
 }
