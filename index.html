@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model Evaluation Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1> Model Evaluation</h1>
+    <p class="subtitle">Analyze ML model performance</p>
+
+    <button onclick="runEvaluation()">Run Evaluation</button>
+    <button onclick="loadPredictions()">Show Predictions (Any random 10)</button>
+
+    <div id="result"></div>
+    <div id="table"></div>
+
+</div>
+
+<script>
+async function runEvaluation() {
+    const res = await fetch("http://127.0.0.1:8000/evaluate");
+    const data = await res.json();
+
+    document.getElementById("result").innerHTML = `
+        <strong>Accuracy:</strong> ${data.accuracy.toFixed(3)} <br>
+        <strong>Precision:</strong> ${data.precision.toFixed(3)} <br>
+        <strong>Recall:</strong> ${data.recall.toFixed(3)} <br>
+        <strong>AUC:</strong> ${data.auc.toFixed(3)}
+    `;
+}
+
+async function loadPredictions() {
+    const res = await fetch("http://127.0.0.1:8000/predictions");
+    const data = await res.json();
+
+    let html = "<table><tr><th>Actual</th><th>Predicted</th><th>Prob</th></tr>";
+
+    data.forEach(row => {
+    const isCorrect = row.actual === row.predicted;
+    const rowClass = isCorrect ? "correct" : "wrong";
+
+    html += `
+    <tr class="${rowClass}">
+        <td>${row.actual}</td>
+        <td>${row.predicted}</td>
+        <td class="prob-high">${row.probability.toFixed(2)}</td>
+    </tr>`;
+});
+    html += "</table>";
+    document.getElementById("table").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
